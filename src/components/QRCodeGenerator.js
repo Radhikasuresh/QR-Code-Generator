@@ -15,6 +15,7 @@ function QRCodeGenerator() {
   const handleInputChange = (e) => {
     setText(e.target.value);
   };
+
   const handleGenerateClick = async () => {
     try {
       const canvas = document.createElement("canvas");
@@ -47,6 +48,7 @@ function QRCodeGenerator() {
     setDimension(0);
     setQRCodeDataUrl("");
   };
+
   const handleDimensionChange = (e) => {
     const { name, value } = e.target;
 
@@ -80,28 +82,34 @@ function QRCodeGenerator() {
                 value={text}
                 onChange={handleInputChange}
               />
-              <Form.Group>
-                <Form.Label>Image Dimensions:</Form.Label>
-                <Form.Control
-                  type="number"
-                  name="dimension"
-                  value={dimension}
-                  onChange={handleDimensionChange}
-                />
-              </Form.Group>
             </Form.Group>
-            <Form.Group>
-              <Form.Label>QR Image Format:</Form.Label>
-              <Form.Control
-                as="select"
-                value={qrImageFormat}
-                onChange={(e) => setQrImageFormat(e.target.value)}
-              >
-                <option value="png">PNG</option>
-                <option value="jpeg">JPEG</option>
-                <option value="svg">SVG</option>
-              </Form.Control>
-            </Form.Group>
+            <Row>
+              <Col md={6}>
+                <Form.Group>
+                  <Form.Label>Image Dimensions:</Form.Label>
+                  <Form.Control
+                    type="number"
+                    name="dimension"
+                    value={dimension}
+                    onChange={handleDimensionChange}
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group>
+                  <Form.Label>QR Image Format:</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={qrImageFormat}
+                    onChange={(e) => setQrImageFormat(e.target.value)}
+                  >
+                    <option value="png">PNG</option>
+                    <option value="jpeg">JPEG</option>
+                    <option value="svg">SVG</option>
+                  </Form.Control>
+                </Form.Group>
+              </Col>
+            </Row>
             <Form.Group>
               <Form.Label>QR Code Color:</Form.Label>
               <Form.Control
@@ -142,7 +150,7 @@ function QRCodeGenerator() {
             </Button>
           </Form>
         </Col>
-        <Col md={6} className="text-center " style={{ marginTop: "100px" }}>
+        <Col md={6} className="text-center mt-3">
           {qrCodeDataUrl && <img src={qrCodeDataUrl} alt="QR Code" />}
         </Col>
       </Row>
